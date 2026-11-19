@@ -1,0 +1,48 @@
+// محاسبه‌گر BMI با دو صفحه و ناوبری
+fun bmi(weight: Float, heightCm: Float): Float {
+    let h = heightCm / 100
+    return weight / (h * h)
+}
+
+fun category(b: Float): String {
+    if b < 18.5 { return "کمبود وزن" }
+    else if b < 25 { return "نرمال" }
+    else if b < 30 { return "اضافه وزن" }
+    return "چاقی"
+}
+
+app "محاسبه‌گر BMI" {
+    screen Main {
+        state weight: String = ""
+        state height: String = ""
+        state result: String = ""
+
+        title("شاخص تودهٔ بدنی")
+        input(weight, "وزن (کیلوگرم)")
+        input(height, "قد (سانتی‌متر)")
+        button("محاسبه") {
+            let w = float(weight)
+            let h = float(height)
+            if w <= 0 or h <= 0 {
+                toast("عدد معتبر وارد کنید")
+            } else {
+                let b = bmi(w, h)
+                result = "BMI = {format(b, 1)} ({category(b)})"
+            }
+        }
+        if result != "" {
+            text(result, 20)
+        }
+        spacer(24)
+        button("دربارهٔ BMI") { navigate(About) }
+    }
+
+    screen About {
+        title("BMI چیست؟")
+        text("BMI = وزن ÷ (قد × قد)")
+        text("کمتر از ۱۸٫۵: کمبود وزن")
+        text("۱۸٫۵ تا ۲۵: نرمال")
+        text("۲۵ تا ۳۰: اضافه وزن")
+        button("بازگشت") { back() }
+    }
+}

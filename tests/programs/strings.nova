@@ -1,0 +1,48 @@
+// رشته‌ها، لیست‌ها و تغییر نام شناسه‌های رزروشده
+fun greet(val: String, Text: Int): String {
+    return "{val}:{Text}"
+}
+
+fun total(object: List<List<Int>>): Int {
+    var when = 0
+    for row in object {
+        for x in row { when += x }
+    }
+    return when
+}
+
+fun main() {
+    let s = "سلام Nova"
+    print(len(s))
+    print(s[0] + s[5])
+    print(contains(s, "No"))
+    var out = ""
+    for c in "abc" { out = c + out }
+    print(out)
+    print("price: $5 \"quoted\" \\ \{braces\}")
+    print("nested {"inner {1 + 1}"}")
+    print(greet("x", 3))
+    print(total([[1, 2], [3], []]))
+    let m = [[1, 2], [3]]
+    print(m)
+    print(m[1][0])
+    print(m == [[1, 2], [3]])
+    print([] + [1])
+    var names: List<String> = []
+    names = names + ["a", "b", "c"]
+    names = remove(names, 1)
+    print(names)
+    print(names != ["a", "c"])
+    print("a" < "b")
+    print(1 + 2 + "x" + 1 + 2)
+    print([true, false])
+    print(str(1.5) + str(true))
+    var n = 0
+    {
+        let n = 5
+        print(n)
+    }
+    print(n)
+    let flags = [1.5, 2]
+    print(contains(flags, 2))
+}

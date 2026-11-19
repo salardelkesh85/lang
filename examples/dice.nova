@@ -1,0 +1,33 @@
+// تاس: اعداد تصادفی، لیست و توابع
+var rolls = 0
+
+fun face(n: Int): String {
+    let faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+    return faces[n - 1]
+}
+
+fun sum(xs: List<Int>): Int {
+    var s = 0
+    for x in xs { s += x }
+    return s
+}
+
+app "تاس" {
+    screen Main {
+        state history: List<Int> = []
+
+        title("تاس بینداز!")
+        button("پرتاب") {
+            let n = random(1, 6)
+            history = [n] + history
+            rolls += 1
+            if n == 6 { toast("شش آوردی!") }
+        }
+        if len(history) > 0 {
+            text("{face(history[0])}  {history[0]}", 48)
+            text("تعداد پرتاب: {rolls} | مجموع: {sum(history)}")
+            text("میانگین: {format(float(sum(history)) / len(history), 2)}")
+            button("پاک کردن") { history = [] }
+        }
+    }
+}

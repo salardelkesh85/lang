@@ -1,0 +1,45 @@
+fun hanoi(n: Int, from: String, to: String, via: String): Int {
+    if n == 0 { return 0 }
+    var moves = hanoi(n - 1, from, via, to)
+    moves += 1
+    moves += hanoi(n - 1, via, to, from)
+    return moves
+}
+
+fun gcd(a: Int, b: Int): Int {
+    if b == 0 { return a }
+    return gcd(b, a % b)
+}
+
+fun sort(xs: List<Int>): List<Int> {
+    if len(xs) <= 1 { return xs }
+    let pivot = xs[0]
+    var less: List<Int> = []
+    var more: List<Int> = []
+    for i in 1..len(xs) {
+        if xs[i] < pivot { less = less + [xs[i]] } else { more = more + [xs[i]] }
+    }
+    return sort(less) + [pivot] + sort(more)
+}
+
+fun depth(n: Int): Int {
+    if n == 0 { return 0 }
+    return 1 + depth(n - 1)
+}
+
+fun main() {
+    print(hanoi(10, "A", "C", "B"))
+    print(gcd(1071, 462))
+    print(sort([5, 3, 9, 1, 5, 7, 2]))
+    print(depth(1500))
+    var sum = 0
+    for i in 1..=100 { sum += i }
+    print(sum)
+    var collatz = 27
+    var steps = 0
+    while collatz != 1 {
+        if collatz % 2 == 0 { collatz /= 2 } else { collatz = 3 * collatz + 1 }
+        steps += 1
+    }
+    print(steps)
+}

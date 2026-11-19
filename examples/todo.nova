@@ -1,0 +1,42 @@
+// اپ «لیست کارها»: ورودی متن، لیست، حلقه در رابط کاربری
+app "لیست کارها" {
+    screen Main {
+        state task: String = ""
+        state tasks: List<String> = []
+        state showDone: Bool = true
+        state done: List<String> = []
+
+        title("کارهای امروز")
+        row {
+            input(task, "کار جدید")
+            button("افزودن") {
+                if len(task) == 0 {
+                    toast("اول یک کار بنویس")
+                } else {
+                    tasks = tasks + [task]
+                    task = ""
+                }
+            }
+        }
+        if len(tasks) == 0 {
+            text("هیچ کاری نداری!")
+        }
+        for i in 0..len(tasks) {
+            row {
+                text("{i + 1}. {tasks[i]}")
+                button("✓") {
+                    done = done + [tasks[i]]
+                    tasks = remove(tasks, i)
+                }
+            }
+        }
+        divider()
+        checkbox(showDone, "نمایش کارهای انجام‌شده")
+        if showDone {
+            text("انجام‌شده: {len(done)}")
+            for d in done {
+                text("  ✔ {d}")
+            }
+        }
+    }
+}

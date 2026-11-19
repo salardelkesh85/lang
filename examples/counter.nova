@@ -1,0 +1,20 @@
+// اپ شمارنده: ساده‌ترین اپ اندروید با Nova
+app "شمارنده" {
+    screen Main {
+        state count: Int = 0
+
+        title("شمارنده")
+        text("مقدار فعلی: {count}", 28)
+        row {
+            button("−") { count -= 1 }
+            button("+") { count += 1 }
+        }
+        button("صفر کن") {
+            count = 0
+            toast("شمارنده صفر شد")
+        }
+        if count >= 10 {
+            text("آفرین! به ۱۰ رسیدی 🎉")
+        }
+    }
+}
